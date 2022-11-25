@@ -3,6 +3,15 @@ import { useState } from "react";
 const Button = ({ text, onClick }) => {
   return <button onClick={onClick}>{text}</button>;
 };
+const Anecdote = ({ heading, text, points }) => {
+  return (
+    <section>
+      <h2>{heading}</h2>
+      <p>{text}</p>
+      <p>has {points} votes</p>
+    </section>
+  );
+};
 
 const App = () => {
   const anecdotes = [
@@ -35,16 +44,14 @@ const App = () => {
   return (
     <div>
       <h1>Anecdote of the day</h1>
-      <p>{anecdotes[selected]}</p>
-      <p>has {points[selected]} votes</p>
+      <Anecdote
+        heading="Anecdote of the day"
+        text={anecdotes[selected]}
+        points={points[selected]}
+      />
       <Button text="vote" onClick={addToVote} />
       <Button text="next anecdote" onClick={getNextA} />
-      {/* <VotedestAnecdote points={points} anecdotes={anecdotes}/> */}
-      <section>
-        <h2>Anecdote with most votes</h2>
-        <p>{anecdotes[maxIndex]}</p>
-        has {points[maxIndex]} votes.
-      </section>
+      <Anecdote heading="Anecdote with most votes" text={anecdotes[maxIndex]} points={points[maxIndex]}/>
     </div>
   );
 };
