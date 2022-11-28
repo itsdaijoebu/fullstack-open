@@ -7,6 +7,8 @@ const Form = ({
   setNewNumber,
   persons,
   setPersons,
+  message,
+  setMessage
 }) => {
   const handleNameInput = (e) => {
     setNewName(e.target.value);
@@ -26,6 +28,11 @@ const Form = ({
         .update(id, updatedPerson)
         .then(update => {
             setPersons(persons.map(person => person.id !== id ? person : update))
+            setMessage(`${update.name}'s number was updated`)
+            setMessageClass('positive-message')
+            setTimeout(() => {
+                setMessage(null)
+            }, 5000)
         })
         return
       } else {
@@ -41,6 +48,10 @@ const Form = ({
 
     phonebookService.create(newPerson).then((res) => {
       setPersons(persons.concat(res));
+      setMessage(`${res.name} was added`)
+      setTimeout(() => {
+          setMessage(null)
+      }, 5000)
       setNewName("");
       setNewNumber("");
     });
