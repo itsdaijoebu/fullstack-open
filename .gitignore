@@ -1,3 +1,8 @@
 node_modules
 .env
-backend
+example-apps
+dist
+*.rest
+Dockerfile
+.dockerignore
+fly.toml

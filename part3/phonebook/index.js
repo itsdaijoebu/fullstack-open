@@ -1,21 +1,24 @@
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
+const cors = require("cors");
 
+const morgan = require("morgan");
 morgan.token("post-details", (req) => {
   if (req.body.length) {
     return JSON.stringify(req.body);
   } else {
-    return ' '
+    return " ";
   }
 });
-
-app.use(express.json());
 app.use(
   morgan(
     ":method :url :status :res[content-length] - response-time ms :post-details"
   )
 );
+
+app.use(express.json());
+app.use(express.static("dist"))
+app.use(cors());
 
 let phonebook = [
   {
@@ -97,7 +100,7 @@ app.delete("/api/persons/:id", (req, res) => {
   res.status(204).end();
 });
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

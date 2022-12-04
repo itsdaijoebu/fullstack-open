@@ -19,7 +19,7 @@ const App = () => {
   const [filteredNames, setFilteredNames] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8001/persons").then((res) => {
+    axios.get(phonebookService.baseUrl).then((res) => {
       setPersons(res.data);
     });
   }, []);
